@@ -5,6 +5,36 @@
     <meta name="viewport" content="width=device-width">
     <title>Astronauts</title>
     <link href="style.css" rel="stylesheet" type="text/css" />
+
+    <script>
+       window.addEventListener("load", function() {
+        fetch("https://handlers.education.launchcode.org/static/astronauts.json").then(function(response) {
+          response.json().then(function(json) {
+            let index = 0;
+    
+            const container = document.getElementById("container");
+            while (index < json.length) {
+            container.innerHTML += 
+            `<div>
+                <div class="astronaut">
+                  <div class="bio">
+                    <h3>${json[index].firstName} ${json[index].lastName}</h3>
+                    <ul>
+                      <li>Hours in Space: ${json[index].hoursInSpace}</li>
+                      <li>Active: ${json[index].active}</li>
+                      <li>
+                        ${json[index].skills}
+                      </li>
+                    <ul>
+                  </div>
+                  <img class="avatar" src="${json[index].picture}">
+              </div>`;
+              index++
+            }
+          });
+        });
+       });
+    </script>
   </head>
   <body>
     <script src="script.js"></script>
